@@ -1,0 +1,544 @@
+{
+	"info": {
+		"_postman_id": "bookstore-inventory-api",
+		"name": "Bookstore Inventory API",
+		"description": "Colección completa de endpoints para el sistema de gestión de inventario de librerías",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Books CRUD",
+			"item": [
+				{
+					"name": "Create Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"El Quijote\",\n  \"author\": \"Miguel de Cervantes\",\n  \"isbn\": \"978-84-376-0494-7\",\n  \"cost_usd\": 15.99,\n  \"stock_quantity\": 25,\n  \"category\": \"Literatura Clásica\",\n  \"supplier_country\": \"ES\",\n  \"local_currency\": \"VES\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/books/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								""
+							]
+						},
+						"description": "Crear un nuevo libro en el inventario"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/books/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								""
+							]
+						},
+						"description": "Obtener todos los libros con paginación"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/books/{{book_id}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"{{book_id}}",
+								""
+							]
+						},
+						"description": "Obtener un libro específico por su ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Don Quijote de la Mancha\",\n  \"author\": \"Miguel de Cervantes\",\n  \"isbn\": \"978-84-376-0494-7\",\n  \"cost_usd\": 16.50,\n  \"selling_price_local\": 382.25,\n  \"local_currency\": \"EUR\",\n  \"stock_quantity\": 20,\n  \"category\": \"Literatura Clásica\",\n  \"supplier_country\": \"ES\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/books/{{book_id}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"{{book_id}}",
+								""
+							]
+						},
+						"description": "Actualizar un libro existente"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/books/{{book_id}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"{{book_id}}",
+								""
+							]
+						},
+						"description": "Eliminar un libro del inventario"
+					},
+					"response": []
+				}
+			],
+			"description": "Operaciones CRUD básicas para libros"
+		},
+		{
+			"name": "Search & Filter",
+			"item": [
+				{
+					"name": "Search by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/books/search/?category=Literatura",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"search",
+								""
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Literatura"
+								}
+							]
+						},
+						"description": "Buscar libros por categoría"
+					},
+					"response": []
+				},
+				{
+					"name": "Low Stock Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/books/low-stock/?threshold=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"low-stock",
+								""
+							],
+							"query": [
+								{
+									"key": "threshold",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Obtener libros con stock bajo"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by Supplier Country",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/books/?supplier_country=ES",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								""
+							],
+							"query": [
+								{
+									"key": "supplier_country",
+									"value": "ES"
+								}
+							]
+						},
+						"description": "Filtrar libros por país del proveedor"
+					},
+					"response": []
+				},
+				{
+					"name": "Search by Title/Author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/books/?search=quijote",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "quijote"
+								}
+							]
+						},
+						"description": "Buscar libros por título o autor"
+					},
+					"response": []
+				},
+				{
+					"name": "Order by Price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/books/?ordering=cost_usd",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								""
+							],
+							"query": [
+								{
+									"key": "ordering",
+									"value": "cost_usd"
+								}
+							]
+						},
+						"description": "Ordenar libros por precio de costo"
+					},
+					"response": []
+				}
+			],
+			"description": "Búsqueda y filtrado de libros"
+		},
+		{
+			"name": "Price Management",
+			"item": [
+				{
+					"name": "Calculate Price (VES)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"currency\": \"VES\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/books/{{book_id}}/calculate-price/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"{{book_id}}",
+								"calculate-price",
+								""
+							]
+						},
+						"description": "Calcular precio de venta sugerido en Bolívares Venezolanos"
+					},
+					"response": []
+				},
+				{
+					"name": "Calculate Price (Default)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/books/{{book_id}}/calculate-price/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"{{book_id}}",
+								"calculate-price",
+								""
+							]
+						},
+						"description": "Calcular precio usando la moneda por defecto del libro (VES)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Price (Legacy)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/books/{{book_id}}/update-price/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"{{book_id}}",
+								"update-price",
+								""
+							]
+						},
+						"description": "Actualizar precio usando el método legacy"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Price History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/books/{{book_id}}/price-history/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"{{book_id}}",
+								"price-history",
+								""
+							]
+						},
+						"description": "Obtener historial de precios de un libro"
+					},
+					"response": []
+				}
+			],
+			"description": "Gestión de precios con integración externa"
+		},
+		{
+			"name": "External Services",
+			"item": [
+				{
+					"name": "Get Exchange Rates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/exchange-rates/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"exchange-rates",
+								""
+							]
+						},
+						"description": "Obtener información sobre tasas de cambio actuales"
+					},
+					"response": []
+				}
+			],
+			"description": "Servicios externos e información de tasas de cambio"
+		},
+		{
+			"name": "Sample Data",
+			"item": [
+				{
+					"name": "Create Sample Books",
+					"item": [
+						{
+							"name": "Create Book 1 - El Quijote",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"El Quijote\",\n  \"author\": \"Miguel de Cervantes\",\n  \"isbn\": \"978-84-376-0494-7\",\n  \"cost_usd\": 15.99,\n  \"stock_quantity\": 25,\n  \"category\": \"Literatura Clásica\",\n  \"supplier_country\": \"ES\",\n  \"local_currency\": \"VES\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/books/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"books",
+										""
+									]
+								},
+								"description": "Crear libro de ejemplo: El Quijote"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Book 2 - Cien Años de Soledad",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Cien Años de Soledad\",\n  \"author\": \"Gabriel García Márquez\",\n  \"isbn\": \"978-84-376-0494-8\",\n  \"cost_usd\": 12.99,\n  \"stock_quantity\": 15,\n  \"category\": \"Literatura Latinoamericana\",\n  \"supplier_country\": \"CO\",\n  \"local_currency\": \"VES\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/books/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"books",
+										""
+									]
+								},
+								"description": "Crear libro de ejemplo: Cien Años de Soledad"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Book 3 - Harry Potter",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Harry Potter y la Piedra Filosofal\",\n  \"author\": \"J.K. Rowling\",\n  \"isbn\": \"978-84-376-0494-9\",\n  \"cost_usd\": 18.50,\n  \"stock_quantity\": 5,\n  \"category\": \"Literatura Juvenil\",\n  \"supplier_country\": \"GB\",\n  \"local_currency\": \"GBP\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/books/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"books",
+										""
+									]
+								},
+								"description": "Crear libro de ejemplo: Harry Potter"
+							},
+							"response": []
+						}
+					],
+					"description": "Crear datos de ejemplo para probar la API"
+				}
+			],
+			"description": "Datos de ejemplo para pruebas"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "book_id",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
